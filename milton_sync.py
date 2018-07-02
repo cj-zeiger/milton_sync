@@ -135,7 +135,7 @@ authentication_state = {
 
 async def load_auth_token():
     try:
-        async with aiofiles.open('./auth_token.txt', 'r') as outfile:
+        async with aiofiles.open('./auth_token.json', 'r') as outfile:
             data = json.loads(await outfile.read())
             if data and data["auth_token"]:
                 return data["auth_token"]
@@ -157,7 +157,7 @@ async def save_auth_token(token):
         "auth_token": token
     }
     try:
-        async with aiofiles.open("./auth_token.txt", "w") as outfile:
+        async with aiofiles.open("./auth_token.json", "w") as outfile:
             await outfile.write(json.dumps(data))
     except Exception as e:
         print(f"error saving auth_token {e}")
